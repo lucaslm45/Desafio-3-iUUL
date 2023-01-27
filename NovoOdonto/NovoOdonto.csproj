@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
@@ -8,11 +8,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="controller\" />
 		<Folder Include="factory\" />
-		<Folder Include="model\" />
-		<Folder Include="presentation\" />
-		<Folder Include="util\" />
+		<Folder Include="presentation\paciente\" />
 	</ItemGroup>
 
 </Project>
