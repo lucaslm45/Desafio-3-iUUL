@@ -1,4 +1,6 @@
-﻿using NovoOdonto.model.validator;
+﻿using AutoMapper;
+using NovoOdonto.data;
+using NovoOdonto.data.validator;
 using NovoOdonto.presentation.agendamento;
 using NovoOdonto.util;
 using System;
@@ -16,12 +18,85 @@ namespace NovoOdonto.controller
         private AgendamentoValidator Validator { get; set; } = new AgendamentoValidator();
         private StatusOperacao status;
 
+        private OdontoDbContext _context;
+        private IMapper _mapper;
+
+        public AgendamentoConsultaController(OdontoDbContext context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
+        }
+
         public void Inicia()
         {
-            SolicitarCPFAgenda();
+            // CPF
+            do
+            {
+                Form.SolicitarCPF();
+                status = Validator.IsValidCPF(Form.Agendamento.CPF);
+                //ToDo : Validar se o CPF possui 11 digitos, se é de verdade e por último validar no Banco de Dados
+
+                if (status != StatusOperacao.Sucesso)
+                    Form.Process(status);
+
+            } while (status != StatusOperacao.Sucesso);
+
+            // Data de Consulta
+            do
+            {
+                Form.SolicitarDataConsulta();
+                status = Validator.IsValidDataConsulta(Form.Agendamento.DataConsulta);
+
+                if (status == StatusOperacao.Sucesso)
+                // Todo: e se não houver nenhum horário disponível para a data escolhida? Nunca vai sair do loop
+                //Sugestão: Numero de tentativas excedidas, forneça novamente a da data ou tente uma nova data
+                {
+                    var tentativas = 3;
+                    do
+                    {
+
+                        tentativas--;
+                        if (tentativas < 1)
+                        {
+                            Console.WriteLine("Numero de tentativas excedidas, forneça novamente a da data ou tente uma nova data.");
+                            break;
+                        }
+
+                        /// Hora de Inicio
+                        SolicitarHoraInicio();
+
+                        //if (Validator.Agendamento.HoraInicio != Validator.FechaAs)
+                        status = SolicitarHoraFim();
+
+                    } while (status != StatusOperacao.Sucesso);
+                }
+
+            } while (status != StatusOperacao.Sucesso);
+
+
             SolicitarDataHoraConsulta();
 
             Console.WriteLine("AgendamentoConsultaController Executado");
+        }
+
+        private StatusOperacao SolicitarHoraFim()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SolicitarCPFConsulta()
+        {
+            // CPF
+            do
+            {
+                Form.SolicitarCPF();
+                status = Validator.IsValidCPF(Form.Agendamento.CPF);
+                //ToDo : Validar se o CPF possui 11 digitos, se é de verdade e por último validar no Banco de Dados
+
+                if (status != StatusOperacao.Sucesso)
+                    Form.Process(status);
+
+            } while (status != StatusOperacao.Sucesso);
         }
 
         private void SolicitarDataHoraConsulta()
@@ -32,6 +107,7 @@ namespace NovoOdonto.controller
                 Validator.IsValidDataConsulta(Form.Agendamento.DataConsulta);
 
                 // Todo: e se não houver nenhum horário disponível para a data escolhida? Nunca vai sair do loop
+                //Sugestão: Numero de tentativas excedidas, forneça novamente a da data ou tente uma nova data
                 bool isValidHora = false;
                 do
                 {
@@ -69,20 +145,5 @@ namespace NovoOdonto.controller
 
             } while (status != StatusOperacao.Sucesso);
         }
-        private void SolicitarCPFAgenda()
-        {
-            // CPF
-            do
-            {
-                Form.SolicitarCPF();
-                status = Validator.IsValidCPF(Form.Agendamento.CPF);
-                //ToDo : Validar se o CPF possui 11 digitos, se é de verdade e por último validar no Banco de Dados
-
-                if (status != StatusOperacao.Sucesso)
-                    Form.Process(status);
-
-            } while (status != StatusOperacao.Sucesso);
-        }
-
     }
 }

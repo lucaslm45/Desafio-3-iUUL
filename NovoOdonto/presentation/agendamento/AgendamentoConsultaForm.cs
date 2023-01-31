@@ -1,4 +1,4 @@
-﻿using NovoOdonto.model.dto;
+﻿using NovoOdonto.data.dto;
 using NovoOdonto.util;
 using System;
 using System.Collections.Generic;

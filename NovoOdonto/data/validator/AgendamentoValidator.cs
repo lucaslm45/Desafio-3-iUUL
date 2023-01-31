@@ -5,21 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NovoOdonto.model.validator
+namespace NovoOdonto.data.validator
 {
     public class AgendamentoValidator
     {
-        public StatusOperacao IsValidCPF(object cPF)
+        public StatusOperacao IsValidCPF(string value)
         {
             return StatusOperacao.Sucesso;
         }
 
-        public StatusOperacao IsValidDataConsulta(string? dataConsulta)
+        public StatusOperacao IsValidDataConsulta(string value)
         {
             throw new NotImplementedException();
         }
 
-        public StatusOperacao IsValidHoraInicio(object inicio)
+        public StatusOperacao IsValidHoraInicio(string value)
         {
             throw new NotImplementedException();
         }
