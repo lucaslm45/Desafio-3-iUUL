@@ -1,4 +1,5 @@
-﻿using NovoOdonto.presentation;
+﻿using NovoOdonto.data;
+using NovoOdonto.presentation;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -49,6 +50,57 @@ namespace NovoOdonto.util
                 resto = 11 - resto;
             digito = digito + resto.ToString();
             return cpf.EndsWith(digito);
+        }
+
+        public static bool PacienteExisteNoBanco(this OdontoDbContext context, string chave)
+        {
+            var paciente = context.Pacientes.FirstOrDefault(p => p.CPF == chave);
+
+            return paciente == null ? false : true;
+        }
+        /// <summary>
+        /// Fornece ao usuário a mensagem de erro.
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns>Retorna um valor falso.</returns>
+        public static bool EncerrarProcessoComErro(this Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+        /// <summary>
+        /// Verifica se uma data qualquer está no formato (ddMMaaaa), sendo dd = dia com 2 digitos, MM = mes com 2 digitos, aaaa = ano com 4 digitos.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Retorna uma data pronta para uso.</returns>
+        /// <exception cref="Exception">Retorna um erro caso a data não esteja no formato correto ou não seja válida</exception>
+        public static DateTime VerificaData(this string data)
+        {
+            if (!DateTime.TryParseExact(data, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime consulta))
+                throw new Exception("Data deve estar no formato ddMMaaaa");
+
+            return consulta;
+        }
+        public static DateTime FormataStringEmData(this string data)
+        {
+            return DateTime.ParseExact(data, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
+        }
+        // Ref: https://stackoverflow.com/questions/2194999/how-to-calculate-an-age-based-on-a-birthday
+        /// <summary>
+        /// Calcula a Idade de uma pessoa a partir da data de aniversário fornecida.
+        /// </summary>
+        /// <param name="aniversario"></param>
+        /// <returns>Retorna um número inteiro que representa a idade.</returns>
+        public static int Idade(this DateTime aniversario)
+        {
+            DateTime now = DateTime.Today;
+            int idade = now.Year - aniversario.Year;
+            if (now < aniversario.AddYears(idade))
+            {
+                idade--;
+            }
+
+            return idade;
         }
         public static bool ExisteNoDicionario<TKey, TValor>(this Dictionary<TKey, TValor> dicionario, TKey chave)
         {

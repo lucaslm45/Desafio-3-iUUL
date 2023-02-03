@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using NovoOdonto.data;
 using NovoOdonto.data.validator;
+using NovoOdonto.Infrastructure;
 using NovoOdonto.presentation.agendamento;
 using NovoOdonto.util;
 using System;
@@ -15,17 +16,8 @@ namespace NovoOdonto.controller
     public class AgendamentoConsultaController
     {
         private AgendamentoConsultaForm Form { get; set; } = new AgendamentoConsultaForm();
-        private AgendamentoValidator Validator { get; set; } = new AgendamentoValidator();
-        private StatusOperacao status;
-
-        private OdontoDbContext _context;
-        private IMapper _mapper;
-
-        public AgendamentoConsultaController(OdontoDbContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
+        private AgendamentoValidador Validador { get; set; } = new AgendamentoValidador();
+        protected bool isValid { get; set; }
 
         public void Inicia()
         {
@@ -33,21 +25,18 @@ namespace NovoOdonto.controller
             do
             {
                 Form.SolicitarCPF();
-                status = Validator.IsValidCPF(Form.Agendamento.CPF);
+                isValid = Validador.IsValidCPF(Form.Agendamento.CPF);
                 //ToDo : Validar se o CPF possui 11 digitos, se é de verdade e por último validar no Banco de Dados
 
-                if (status != StatusOperacao.Sucesso)
-                    Form.Process(status);
-
-            } while (status != StatusOperacao.Sucesso);
+            } while (!isValid);
 
             // Data de Consulta
             do
             {
                 Form.SolicitarDataConsulta();
-                status = Validator.IsValidDataConsulta(Form.Agendamento.DataConsulta);
+                isValid = Validador.IsValidDataConsulta(Form.Agendamento.DataConsulta);
 
-                if (status == StatusOperacao.Sucesso)
+                //if (isValid == StatusOperacao.Sucesso)
                 // Todo: e se não houver nenhum horário disponível para a data escolhida? Nunca vai sair do loop
                 //Sugestão: Numero de tentativas excedidas, forneça novamente a da data ou tente uma nova data
                 {
@@ -66,12 +55,12 @@ namespace NovoOdonto.controller
                         SolicitarHoraInicio();
 
                         //if (Validator.Agendamento.HoraInicio != Validator.FechaAs)
-                        status = SolicitarHoraFim();
+                        isValid = SolicitarHoraFim();
 
-                    } while (status != StatusOperacao.Sucesso);
+                    } while (!isValid);
                 }
 
-            } while (status != StatusOperacao.Sucesso);
+            } while (!isValid);
 
 
             SolicitarDataHoraConsulta();
@@ -79,7 +68,7 @@ namespace NovoOdonto.controller
             Console.WriteLine("AgendamentoConsultaController Executado");
         }
 
-        private StatusOperacao SolicitarHoraFim()
+        private bool SolicitarHoraFim()
         {
             throw new NotImplementedException();
         }
@@ -90,13 +79,10 @@ namespace NovoOdonto.controller
             do
             {
                 Form.SolicitarCPF();
-                status = Validator.IsValidCPF(Form.Agendamento.CPF);
+                isValid = Validador.IsValidCPF(Form.Agendamento.CPF);
                 //ToDo : Validar se o CPF possui 11 digitos, se é de verdade e por último validar no Banco de Dados
 
-                if (status != StatusOperacao.Sucesso)
-                    Form.Process(status);
-
-            } while (status != StatusOperacao.Sucesso);
+            } while (!isValid);
         }
 
         private void SolicitarDataHoraConsulta()
@@ -104,7 +90,7 @@ namespace NovoOdonto.controller
             try
             {
                 Form.SolicitarDataConsulta();
-                Validator.IsValidDataConsulta(Form.Agendamento.DataConsulta);
+                isValid = Validador.IsValidDataConsulta(Form.Agendamento.DataConsulta);
 
                 // Todo: e se não houver nenhum horário disponível para a data escolhida? Nunca vai sair do loop
                 //Sugestão: Numero de tentativas excedidas, forneça novamente a da data ou tente uma nova data
@@ -138,12 +124,9 @@ namespace NovoOdonto.controller
             do
             {
                 Form.SolicitarHoraInicio();
-                status = Validator.IsValidHoraInicio(Form.Agendamento.HoraInicio);
+                isValid = Validador.IsValidHoraInicio(Form.Agendamento.HoraInicio);
 
-                if (status != StatusOperacao.Sucesso)
-                    Form.Process(status);
-
-            } while (status != StatusOperacao.Sucesso);
+            } while (!isValid);
         }
     }
 }

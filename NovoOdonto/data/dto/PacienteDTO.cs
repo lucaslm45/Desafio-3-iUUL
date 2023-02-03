@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace NovoOdonto.data.dto
 {
-    public class AgendamentoDTO
+    public class PacienteDTO
     {
         public string CPF { get; set; }
-        public string? DataConsulta { get; set; }
-        public string? HoraInicio { get; set; }
-        public string? HoraFim { get; set; }
+        public string Nome { get; set; }
+        public string DataNascimento { get; internal set; }
     }
 }

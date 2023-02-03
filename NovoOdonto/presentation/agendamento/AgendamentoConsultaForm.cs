@@ -1,4 +1,5 @@
 ﻿using NovoOdonto.data.dto;
+using NovoOdonto.Infrastructure;
 using NovoOdonto.util;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NovoOdonto.presentation.agendamento
 {
-    public class AgendamentoConsultaForm : IProcess
+    public class AgendamentoConsultaForm
     {
         public AgendamentoDTO Agendamento { get; private set; }
         public AgendamentoConsultaForm() =>

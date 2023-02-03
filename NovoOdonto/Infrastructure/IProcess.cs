@@ -1,6 +1,6 @@
 ﻿using NovoOdonto.util;
 
-namespace NovoOdonto.presentation
+namespace NovoOdonto.Infrastructure
 {
     public interface IProcess
     {
