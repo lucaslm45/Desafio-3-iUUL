@@ -1,31 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NovoOdonto.data.validator;
-using NovoOdonto.data;
-using NovoOdonto.model;
-using NovoOdonto.presentation.paciente;
-using System.Xml.Linq;
+﻿using NovoOdonto.data;
+using NovoOdonto.util;
 
 namespace NovoOdonto.controller
 {
-    public class exclusaoPacienteController
+    public class ExclusaoPacienteController
     {
-        protected OdontoDbContext Contexto { get; set; } = new OdontoDbContext();
+        public ExclusaoPacienteController(OdontoDbContext contexto)
+        {
+            Contexto = contexto;
+        }
+
+        private OdontoDbContext Contexto { get; set; }
 
         public void ExcluirPaciente()
         {
             string cpf = Console.ReadLine();
-            if (util.Extensions.IsCpf(cpf))
+            if (cpf.IsCpf())
             {
                 var paciente = Contexto.Pacientes.Find(cpf);
-                Contexto.Pacientes.Remove(paciente);
-                Contexto.SaveChanges();
+                if (paciente != null)
+                {
+                    Contexto.Pacientes.Remove(paciente);
+                    Contexto.SaveChanges();
+                }
             }
             else { Console.WriteLine("CPF inválido!"); }
-            
+
         }
     }
 }

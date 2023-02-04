@@ -3,24 +3,21 @@ using NovoOdonto.data.validator;
 using NovoOdonto.Infrastructure;
 using NovoOdonto.model;
 using NovoOdonto.presentation.paciente;
-using NovoOdonto.util;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NovoOdonto.controller
 {
-    public class InclusaoPacienteController
+    public class InclusaoPacienteController : IController
     {
-        protected OdontoDbContext Contexto { get; set; } = new OdontoDbContext();
+        public InclusaoPacienteController(OdontoDbContext contexto)
+        {
+            Contexto = contexto;
+        }
+        private OdontoDbContext Contexto { get; set; }
         private InclusaoPacienteForm Form { get; set; } = new InclusaoPacienteForm();
         private PacienteValidador Validador { get; set; } = new PacienteValidador();
-        protected bool isValid { get; set; }
+        public bool isValid { get; set; }
 
-        public void Roda()
+        public void Inicia()
         {
             // CPF
             do
@@ -51,14 +48,11 @@ namespace NovoOdonto.controller
                 var Paciente = new Paciente(Validador.Paciente.CPF, Validador.Paciente.Nome, Validador.Paciente.DataNascimento);
                 Contexto.Pacientes.Add(Paciente);
                 Contexto.SaveChanges();
+                Console.WriteLine("Paciente cadastrado com sucesso!");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Paciente cadastrado com sucesso!");
             }
         }
     }

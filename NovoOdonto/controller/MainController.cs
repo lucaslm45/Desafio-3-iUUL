@@ -1,32 +1,20 @@
-﻿using AutoMapper;
-using NovoOdonto.data;
-using NovoOdonto.Infrastructure;
-using NovoOdonto.util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NovoOdonto.data;
 
 namespace NovoOdonto.controller
 {
-    public class MainController : IController
+    public class MainController
     {
-        public MainController()
+        public MainController(OdontoDbContext contexto)
         {
-            Contexto = new OdontoDbContext();
-            Teste = new InclusaoPacienteController();
+            Contexto = contexto;
         }
 
-        protected OdontoDbContext Contexto { get; set; }
-        public InclusaoPacienteController Teste { get; set; }
+        private OdontoDbContext Contexto { get; set; }
 
         public void Inicia()
         {
-            var context = new OdontoDbContext();
-            context.IniciaBanco();
-            Teste.Roda();
-
+            var Teste = new InclusaoPacienteController(Contexto);
+            Teste.Inicia();
         }
     }
 }

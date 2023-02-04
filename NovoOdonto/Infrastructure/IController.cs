@@ -12,5 +12,6 @@ namespace NovoOdonto.Infrastructure
     public interface IController
     {
         void Inicia();
+        bool isValid { get; set; }
     }
 }
