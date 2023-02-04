@@ -86,5 +86,7 @@ namespace NovoOdonto.data
         public DbSet<Paciente> Pacientes { get; set; }
 
 
+
+
     }
 }

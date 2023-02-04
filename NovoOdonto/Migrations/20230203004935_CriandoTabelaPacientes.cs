@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using NovoOdonto.model;
 
 #nullable disable
 
@@ -26,11 +27,14 @@ namespace NovoOdonto.Migrations
                 });
         }
 
+
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Pacientes");
         }
+
+
     }
 }

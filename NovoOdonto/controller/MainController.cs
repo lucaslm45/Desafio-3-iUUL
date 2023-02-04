@@ -23,7 +23,10 @@ namespace NovoOdonto.controller
 
         public void Inicia()
         {
+            var context = new OdontoDbContext();
+            context.IniciaBanco();
             Teste.Roda();
+
         }
     }
 }

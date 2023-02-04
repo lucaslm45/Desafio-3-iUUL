@@ -13,13 +13,13 @@ namespace NovoOdonto
         static void Main(string[] args)
         {
             var controlador = new MainController();
-            var  context = new OdontoDbContext();
+            var teste = new exclusaoPacienteController();
 
-            context.IniciaBanco();
-            controlador.Inicia();
+            teste.ExcluirPaciente();
+            //controlador.Inicia();
+
         }
 
     }
-
 
 }

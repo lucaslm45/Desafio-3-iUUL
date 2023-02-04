@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NovoOdonto.presentation.agendamento
+namespace NovoOdonto.presentation.paciente
 {
     public class InclusaoPacienteForm
     {

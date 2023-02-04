@@ -2,7 +2,7 @@
 using NovoOdonto.data.validator;
 using NovoOdonto.Infrastructure;
 using NovoOdonto.model;
-using NovoOdonto.presentation.agendamento;
+using NovoOdonto.presentation.paciente;
 using NovoOdonto.util;
 using System;
 using System.Collections.Generic;
