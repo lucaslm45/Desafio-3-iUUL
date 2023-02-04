@@ -60,12 +60,16 @@ namespace NovoOdonto.presentation.agendamento
                 case StatusOperacao.PacienteJaCadastrado:
                     break;
                 case StatusOperacao.DadosInvalidosPaciente:
+                    Console.WriteLine(Labels.DadosInvalidosPaciente);
                     break;
                 case StatusOperacao.ConsultaAgendada:
+                    Console.WriteLine(Labels.ConsultaAgendada);
                     break;
                 case StatusOperacao.ConflitoAgendamento:
+                    Console.WriteLine(Labels.ConflitoAgendamento);
                     break;
                 case StatusOperacao.AgendamentoNaoCadastrado:
+                    Console.WriteLine(Labels.AgendamentoNaoCadastrado);
                     break;
             }
         }
