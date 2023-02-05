@@ -1,7 +1,7 @@
 ﻿using NovoOdonto.data;
 using NovoOdonto.util;
 
-namespace NovoOdonto.controller
+namespace NovoOdonto.controller.controladoresPacientes
 {
     public class ExclusaoPacienteController
     {
@@ -14,6 +14,7 @@ namespace NovoOdonto.controller
 
         public void ExcluirPaciente()
         {
+            Console.WriteLine("Digite o CPF do paciente que você quer excluir: ");
             string cpf = Console.ReadLine();
             if (cpf.IsCpf())
             {

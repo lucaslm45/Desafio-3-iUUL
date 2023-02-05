@@ -4,7 +4,7 @@ using NovoOdonto.Infrastructure;
 using NovoOdonto.model;
 using NovoOdonto.presentation.paciente;
 
-namespace NovoOdonto.controller
+namespace NovoOdonto.controller.controladoresPacientes
 {
     public class InclusaoPacienteController : IController
     {
