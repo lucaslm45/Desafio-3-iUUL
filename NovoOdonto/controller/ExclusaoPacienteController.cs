@@ -3,7 +3,7 @@ using NovoOdonto.data.validator;
 using NovoOdonto.presentation.paciente;
 using NovoOdonto.util;
 
-namespace NovoOdonto.controller.controladoresPacientes
+namespace NovoOdonto.controller
 {
     public class ExclusaoPacienteController
     {
@@ -12,7 +12,7 @@ namespace NovoOdonto.controller.controladoresPacientes
             var isValid = false;
             //var Form = new ExclusaoPacienteForm();
             var Validador = new PacienteValidador();
-            Console.WriteLine("ExclusaoPacienteController not implemented\n");
+            Console.WriteLine("\nExclusaoPacienteController not implemented\n");
         }
 
         //public void ExcluirPaciente()
@@ -28,22 +28,5 @@ namespace NovoOdonto.controller.controladoresPacientes
         //        }
         //    }
         //    else { Console.WriteLine("CPF inválido!"); }
-
-        public void ExcluirPaciente()
-        {
-            Console.WriteLine("Digite o CPF do paciente que você quer excluir: ");
-            string cpf = Console.ReadLine();
-            if (cpf.IsCpf())
-            {
-                var paciente = Contexto.Pacientes.Find(cpf);
-                if (paciente != null)
-                {
-                    Contexto.Pacientes.Remove(paciente);
-                    Contexto.SaveChanges();
-                }
-            }
-            else { Console.WriteLine("CPF inválido!"); }
-
-        }
     }
 }

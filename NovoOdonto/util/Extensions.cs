@@ -1,5 +1,6 @@
 ﻿using NovoOdonto.data;
 using NovoOdonto.presentation;
+using NovoOdonto.presentation.paciente;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,6 +12,19 @@ namespace NovoOdonto.util
 {
     public static class Extensions
     {
+        public static void CabecalhoListaPacientes()
+        {
+            Console.WriteLine("------------------------------------------------------------");
+            Console.Write("CPF".PadRight((int)Espacos.CPF));
+            Console.Write("Nome".PadRight((int)Espacos.Nome));
+            Console.Write("Dt. Nasc.".PadRight((int)Espacos.Nascimento));
+            Console.WriteLine("Idade".PadLeft((int)Espacos.Idade));
+            Console.WriteLine("------------------------------------------------------------");
+        }
+        public static void RodapeListaPacientes()
+        {
+            Console.WriteLine("------------------------------------------------------------\n");
+        }
         /// <summary>
         /// Verifica se uma escolha não é válida
         /// </summary>

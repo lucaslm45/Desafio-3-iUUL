@@ -39,7 +39,7 @@ namespace NovoOdonto.Migrations
 
                     b.HasKey("CPF");
 
-                    b.ToTable("Pacientes");
+                    b.ToTable("Pacientes", (string)null);
                 });
 #pragma warning restore 612, 618
         }

@@ -4,7 +4,7 @@ using NovoOdonto.Infrastructure;
 using NovoOdonto.model;
 using NovoOdonto.presentation.paciente;
 
-namespace NovoOdonto.controller.controladoresPacientes
+namespace NovoOdonto.controller
 {
     public class InclusaoPacienteController
     {
@@ -42,7 +42,7 @@ namespace NovoOdonto.controller.controladoresPacientes
                 var Paciente = new Paciente(Validador.Paciente.CPF, Validador.Paciente.Nome, Validador.Paciente.DataNascimento);
                 contexto.Pacientes.Add(Paciente);
                 contexto.SaveChanges();
-                Console.WriteLine("Paciente cadastrado com sucesso!");
+                Console.WriteLine("Paciente cadastrado com sucesso!\n");
             }
             catch (Exception ex)
             {

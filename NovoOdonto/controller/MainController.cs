@@ -31,7 +31,7 @@ namespace NovoOdonto.controller
                     MenuAgenda();
                     break;
                 case "3":
-                    Console.WriteLine("Fim");
+                    Console.WriteLine("\nFim");
                     return;
             }
             MenuPrincipal();
@@ -48,12 +48,10 @@ namespace NovoOdonto.controller
                     ExclusaoPacienteController.Inicia(Contexto);
                     break;
                 case "3":
-                    Console.WriteLine("ListarPacientesPorCPF not implemented\n");
-                    //ListaPacientes.ListarPacientesPorCPF();
+                    ListagemPaciente.ListarPorCPF(Contexto);
                     break;
                 case "4":
-                    Console.WriteLine("ListarPacientesPorNome not implemented\n");
-                    //ListaPacientes.ListarPacientesPorNome();
+                    ListagemPaciente.ListarPorNome(Contexto);
                     break;
                 case "5":
                     return;
