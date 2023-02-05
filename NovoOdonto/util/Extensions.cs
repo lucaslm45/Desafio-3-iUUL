@@ -12,6 +12,31 @@ namespace NovoOdonto.util
     public static class Extensions
     {
         /// <summary>
+        /// Verifica se uma escolha não é válida
+        /// </summary>
+        /// <param name="escolha"></param>
+        /// <param name="menu"></param>
+        /// <returns>Retorna um valor verdadeiro quando a escolha não é valida.</returns>
+        public static bool NaoEhEscolhaValida(this string escolha, Menu menu)
+        {
+            switch (menu)
+            {
+                case Menu.Principal:
+                    return !EscolhaUmDoisTres(escolha);
+                case Menu.Cadastra:
+                    return !(EscolhaUmDoisTres(escolha) || escolha == "4" || escolha == "5");
+                case Menu.Agenda:
+                    return !(EscolhaUmDoisTres(escolha) || escolha == "4");
+                case Menu.ListarAgenda:
+                    return !EscolhaUmDoisTres(escolha);
+                default: return false;
+            }
+        }
+        public static bool EscolhaUmDoisTres(string escolha)
+        {
+            return escolha == "1" || escolha == "2" || escolha == "3";
+        }
+        /// <summary>
         /// Valida se um texto é um CPF válido.
         /// </summary>
         /// <param name="cpf"></param>

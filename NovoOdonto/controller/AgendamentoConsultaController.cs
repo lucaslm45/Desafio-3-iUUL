@@ -1,4 +1,5 @@
-﻿using NovoOdonto.data.validator;
+﻿using NovoOdonto.data;
+using NovoOdonto.data.validator;
 using NovoOdonto.presentation.agendamento;
 
 namespace NovoOdonto.controller
@@ -8,7 +9,14 @@ namespace NovoOdonto.controller
         private AgendamentoConsultaForm Form { get; set; } = new AgendamentoConsultaForm();
         private AgendamentoValidador Validador { get; set; } = new AgendamentoValidador();
         protected bool isValid { get; set; }
+        public static void Inicia(OdontoDbContext contexto)
+        {
+            var isValid = false;
+            var Form = new AgendamentoConsultaForm();
+            var Validador = new AgendamentoValidador();
 
+            Console.WriteLine("AgendamentoConsultaController not implemented\n");
+        }
         public void Inicia()
         {
             // CPF
@@ -55,7 +63,7 @@ namespace NovoOdonto.controller
 
             SolicitarDataHoraConsulta();
 
-            Console.WriteLine("AgendamentoConsultaController Executado");
+            Console.WriteLine("Agendamento realizado com sucesso!");
         }
 
         private bool SolicitarHoraFim()
@@ -118,5 +126,7 @@ namespace NovoOdonto.controller
 
             } while (!isValid);
         }
+
+
     }
 }

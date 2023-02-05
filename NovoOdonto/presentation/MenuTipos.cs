@@ -8,5 +8,7 @@ namespace NovoOdonto.presentation
 {
     public enum Menu
     {
+        Principal, Cadastra, Agenda,
+        ListarAgenda
     }
 }
