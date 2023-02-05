@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NovoOdonto.presentation.agendamento
 {
+    /// <summary>
+    /// Sem uso por enquanto, talvez não será usado
+    /// </summary>
     public class Labels
     {
         public const string Sucesso = "\nAgendamento realizado com sucesso!";

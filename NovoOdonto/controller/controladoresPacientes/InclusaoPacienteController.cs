@@ -6,24 +6,18 @@ using NovoOdonto.presentation.paciente;
 
 namespace NovoOdonto.controller.controladoresPacientes
 {
-    public class InclusaoPacienteController : IController
+    public class InclusaoPacienteController
     {
-        public InclusaoPacienteController(OdontoDbContext contexto)
+        public static void Inicia(OdontoDbContext contexto)
         {
-            Contexto = contexto;
-        }
-        private OdontoDbContext Contexto { get; set; }
-        private InclusaoPacienteForm Form { get; set; } = new InclusaoPacienteForm();
-        private PacienteValidador Validador { get; set; } = new PacienteValidador();
-        public bool isValid { get; set; }
-
-        public void Inicia()
-        {
+            var isValid = false;
+            var Form = new InclusaoPacienteForm();
+            var Validador = new PacienteValidador();
             // CPF
             do
             {
                 Form.SolicitarCPF();
-                isValid = Validador.IsValidCPF(Form.Paciente.CPF, Contexto);
+                isValid = Validador.IsValidCPF(Form.Paciente.CPF, contexto);
 
             } while (!isValid);
 
@@ -46,8 +40,8 @@ namespace NovoOdonto.controller.controladoresPacientes
             try
             {
                 var Paciente = new Paciente(Validador.Paciente.CPF, Validador.Paciente.Nome, Validador.Paciente.DataNascimento);
-                Contexto.Pacientes.Add(Paciente);
-                Contexto.SaveChanges();
+                contexto.Pacientes.Add(Paciente);
+                contexto.SaveChanges();
                 Console.WriteLine("Paciente cadastrado com sucesso!");
             }
             catch (Exception ex)
