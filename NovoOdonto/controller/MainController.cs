@@ -69,7 +69,6 @@ namespace NovoOdonto.controller
                     break;
                 case "2":
                     CancelamentoConsultaController.Inicia(Contexto);
-                    Console.WriteLine("//2 - Cancelar agendamento (NotImplemented)\n");
                     break;
                 case "3":
                     MenuListarAgenda();

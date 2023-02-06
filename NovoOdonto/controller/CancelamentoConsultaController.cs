@@ -14,16 +14,16 @@ namespace NovoOdonto.controller
         {
             Console.WriteLine("Digite o CPF do paciente que você quer excluir o agendamento: ");
 
-            
+
 
             string cpf = Console.ReadLine();
             //Método para listar agenda do paciente
 
             Console.WriteLine("Digite o ID do agendamento: ");
 
-            int id = Convert.ToInt32(Console.ReadLine()); 
+            int id = Convert.ToInt32(Console.ReadLine());
 
-            
+
 
             if (cpf.IsCpf())
             {
@@ -33,6 +33,7 @@ namespace NovoOdonto.controller
                 {
                     contexto.Agenda.Remove(agendamento);
                     contexto.SaveChanges();
+                    Console.WriteLine($"Agendamento com ID {agendamento.ID } de {paciente.Nome} foi excluído!");
                 }
             }
             else { Console.WriteLine("CPF inválido!"); }
