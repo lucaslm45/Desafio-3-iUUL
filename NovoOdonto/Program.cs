@@ -13,9 +13,9 @@ namespace NovoOdonto
     {
         static void Main(string[] args)
         {
-            var escolha = "";
+            /*var escolha = "";
             var localizacaoProjeto = "";
-
+            
             //Informar localizacao do arquivo que contem a informacao da string de conexão
             do
             {
@@ -69,8 +69,15 @@ namespace NovoOdonto
             .AddJsonFile($"{localizacaoProjeto}Desafio-3-iUUL\\NovoOdonto\\util\\appsettings.json", optional: false, reloadOnChange: true)
             .Build();
             connectionString = configuration.GetConnectionString("DefaultConnection");
+            */
 
-            connectionString = connectionString.Replace("Database=Consultorio", $"Database={dataBaseName}");
+
+            /// Habilitar o código acima antes de finalizar a entrega final
+            /// 
+
+            var connectionString = "Host=localhost;Port=5432;Database=Consultorio;Username=postgres;Password=root";
+            //var connectionString = "Host=localhost;Port=5432;Database=Consultorio;Username=postgres;Password=136341";
+            //connectionString.Replace("Database=Consultorio", $"Database={dataBaseName}");
 
             // Inicializa o contexto da Aplicação
             var contexto = new OdontoDbContext(new DbContextOptionsBuilder<OdontoDbContext>()

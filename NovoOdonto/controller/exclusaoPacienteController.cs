@@ -8,7 +8,7 @@ namespace NovoOdonto.controller
     public class ExclusaoPacienteController
     {
 
-        public static void ExcluirPaciente(OdontoDbContext contexto)
+        public static void Inicia(OdontoDbContext contexto)
         {
             Console.WriteLine("Digite o CPF do paciente que você quer excluir: ");
             string cpf = Console.ReadLine();
