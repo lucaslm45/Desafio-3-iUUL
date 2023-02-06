@@ -23,7 +23,6 @@ namespace NovoOdonto.controller
             {
                 Form.SolicitarCPF();
                 isValid = Validador.IsValidCPF(Form.Agendamento.CPF);
-                //ToDo : Validar se o CPF possui 11 digitos, se é de verdade e por último validar no Banco de Dados
 
             } while (!isValid);
 
@@ -49,11 +48,11 @@ namespace NovoOdonto.controller
                 isValid = Validador.IsValidHoraFim(Form.Agendamento.HoraFim);
             } while (!isValid);
 
-            
+
 
             var paciente = contexto.Pacientes.Find(Validador.Agendamento.CPF);
-            var Agendamento = new Agendamento(paciente, Validador.Agendamento.HoraInicio, Validador.Agendamento.HoraFim, Validador.Agendamento.DataConsulta);
-            contexto.Agenda.Add(Agendamento);
+            var Agendamento = new Agendamento(Validador.Agendamento.DataConsulta, Validador.Agendamento.HoraInicio, Validador.Agendamento.HoraFim, paciente);
+            contexto.Agendamentos.Add(Agendamento);
             contexto.SaveChanges();
             Console.WriteLine("Agendamento feito com sucesso!@");
         }

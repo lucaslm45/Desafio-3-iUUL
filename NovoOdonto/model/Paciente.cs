@@ -17,18 +17,17 @@ namespace NovoOdonto.model
         public string Nome { get; set; }
         public DateTime Nascimento { get; set; }
         public int Idade { get; set; }
-        //public Agendamento Consulta { get; private set; }
+        public virtual List<Agendamento> Agendamentos { get; set; }
 
         public Paciente()
         { }
-        public Paciente(string cpf, String nome, string nascimento)
+        public Paciente(string cpf, string nome, string nascimento)
         {
             CPF = cpf;
             Nome = nome;
-            Nascimento = nascimento.VerificaData().ToUniversalTime();
+            Nascimento = nascimento.FormataStringEmData();
 
             Idade = Nascimento.Idade();
-            //Consulta = new Agendamento();
         }
         /// <summary>
         /// Sobreescreve o método ToString para fornecer a saída desejada.

@@ -120,9 +120,26 @@ namespace NovoOdonto.util
 
             return consulta;
         }
+        /// <summary>
+        /// Verifica se a hora informada está no formato correto e se os minutos são múltiplos de 15 minutos
+        /// </summary>
+        /// <param name="hora"></param>
+        /// <returns>Retorna a hora no formato correto para a aplicação.</returns>
+        /// <exception cref="Exception"></exception>
+        public static TimeSpan VerificaHora(this string hora)
+        {
+            if (!DateTime.TryParseExact(hora, "HHmm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime horario))
+                throw new Exception("Erro: O formato de hora deve estar em HHmm");
+
+            var Minutos = horario.TimeOfDay.Minutes;
+
+            return !(Minutos == 0 || Minutos % 15 == 0)
+                ? throw new Exception("Erro: Os minutos devem ser de 15 em 15 minutos")
+                : horario.TimeOfDay;
+        }
         public static DateTime FormataStringEmData(this string data)
         {
-            return DateTime.ParseExact(data, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
+            return DateTime.ParseExact(data, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None).ToUniversalTime();
         }
         // Ref: https://stackoverflow.com/questions/2194999/how-to-calculate-an-age-based-on-a-birthday
         /// <summary>

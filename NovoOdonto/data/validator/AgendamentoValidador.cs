@@ -11,12 +11,11 @@ namespace NovoOdonto.data.validator
 {
     public class AgendamentoValidador
     {
-        public AgendamentoValidador() 
+        public AgendamentoValidador()
         {
             Agendamento = new();
         }
         public AgendamentoDTO Agendamento { get; private set; }
-
 
 
         public bool IsValidCPF(string cpf)
@@ -50,7 +49,7 @@ namespace NovoOdonto.data.validator
             return true;
         }
 
-        public bool IsValidHoraFim(string horaFim) 
+        public bool IsValidHoraFim(string horaFim)
         {
             Agendamento.HoraFim = horaFim;
             return true;

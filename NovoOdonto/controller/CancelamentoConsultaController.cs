@@ -28,12 +28,12 @@ namespace NovoOdonto.controller
             if (cpf.IsCpf())
             {
                 var paciente = contexto.Pacientes.Find(cpf);
-                var agendamento = contexto.Agenda.Find(id);
+                var agendamento = contexto.Agendamentos.Find(id);
                 if (paciente != null)
                 {
-                    contexto.Agenda.Remove(agendamento);
+                    contexto.Agendamentos.Remove(agendamento);
                     contexto.SaveChanges();
-                    Console.WriteLine($"Agendamento com ID {agendamento.ID } de {paciente.Nome} foi excluído!");
+                    Console.WriteLine($"Agendamento com ID {agendamento.ID} de {paciente.Nome} foi excluído!");
                 }
             }
             else { Console.WriteLine("CPF inválido!"); }

@@ -13,26 +13,25 @@ namespace NovoOdonto.model
     {
         [Key]
         public int ID { get; set; }
-
+        [Required]
+        public DateTime DataConsulta { get; set; }
+        [Required]
+        public TimeSpan HoraInicio { get; set; }
+        [Required]
+        public TimeSpan HoraFim { get; set; }
+        public TimeSpan Tempo { get; }
         [Required]
         public virtual Paciente Paciente { get; set; }
 
-        [Required]
-        public string HoraInicio { get; set; }
-
-        public string Data { get; set; }
-
-        [Required]
-        public string HoraFim { get; set; }
-
+        public string PacienteId { get; set; }
         public Agendamento() { }
 
-        public Agendamento(Paciente paciente, string horaInicial, string horaFinal, string data)
+        public Agendamento(string data, string horaInicio, string horaFim, Paciente paciente)
         {
             Paciente = paciente;
-            HoraInicio = horaInicial;
-            HoraFim = horaFinal;
-            Data = data;
+            HoraInicio = horaInicio.VerificaHora();
+            HoraFim = horaFim.VerificaHora();
+            DataConsulta = data.FormataStringEmData();
         }
     }
 }

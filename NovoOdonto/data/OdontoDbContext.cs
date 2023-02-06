@@ -37,17 +37,17 @@ namespace NovoOdonto.data
         //    optionsBuilder.UseNpgsql(connectionString);
         //}
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //modelBuilder.Entity<Agendamento>()
-        //    .HasOne(agendamento => agendamento.Paciente)
-        //    .WithOne(paciente => paciente.Agendamento)
-        //    .HasForeignKey<Paciente>(paciente => paciente.AgendamentoId);
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Agendamento>()
+                .HasOne(agendamento => agendamento.Paciente)
+                .WithMany(paciente => paciente.Agendamentos)
+                .HasForeignKey(agendamento => agendamento.PacienteId);
+        }
 
         //public DbSet<Agendamento> Agendamentos { get; set; }
         public DbSet<Paciente> Pacientes { get; set; }
-        public DbSet<Agendamento> Agenda { get; set; }
+        public DbSet<Agendamento> Agendamentos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
