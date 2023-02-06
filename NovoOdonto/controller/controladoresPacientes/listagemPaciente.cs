@@ -10,29 +10,6 @@ namespace NovoOdonto.controller.controladoresPacientes
 {
     public class listagemPaciente
     {
-        public listagemPaciente(OdontoDbContext contexto)
-        {
-            Contexto = contexto;
-        }
-
-        private OdontoDbContext Contexto { get; set; }
-
-        public void ListarPorCPF()
-        {
-            var pacientesListadosPorCPF = new List<Paciente>();
-
-            var pacientes = from paciente in Contexto.Pacientes orderby paciente.CPF select paciente;
-
-            foreach (var paciente in pacientes) { Console.WriteLine($"{paciente.CPF} - {paciente.Nome}"); }
-        }
-
-        public void ListarPorNome()
-        {
-            var pacientesListadosPorNome = new List<Paciente>();
-
-            var pacientes = from paciente in Contexto.Pacientes orderby paciente.Nome select paciente;
-
-            foreach (var paciente in pacientes) { Console.WriteLine($"{paciente.CPF} - {paciente.Nome}"); }
-        }
+        
     }
 }

@@ -29,17 +29,17 @@ namespace NovoOdonto.controller.controladoresPacientes
         //    }
         //    else { Console.WriteLine("CPF inválido!"); }
 
-        public void ExcluirPaciente()
+        public void ExcluirPaciente(OdontoDbContext contexto)
         {
             Console.WriteLine("Digite o CPF do paciente que você quer excluir: ");
             string cpf = Console.ReadLine();
             if (cpf.IsCpf())
             {
-                var paciente = Contexto.Pacientes.Find(cpf);
+                var paciente = contexto.Pacientes.Find(cpf);
                 if (paciente != null)
                 {
-                    Contexto.Pacientes.Remove(paciente);
-                    Contexto.SaveChanges();
+                    contexto.Pacientes.Remove(paciente);
+                    contexto.SaveChanges();
                 }
             }
             else { Console.WriteLine("CPF inválido!"); }

@@ -45,7 +45,7 @@ namespace NovoOdonto.controller
                     InclusaoPacienteController.Inicia(Contexto);
                     break;
                 case "2":
-                    ExclusaoPacienteController.Inicia(Contexto);
+                    ExclusaoPacienteController.ExcluirPaciente(Contexto);
                     break;
                 case "3":
                     Console.WriteLine("ListarPacientesPorCPF not implemented\n");
