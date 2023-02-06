@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace NovoOdonto.controller
 {
-    internal class ConsultarPacientesController
+    public class ConsultarPacientesController
     {
+
     }
 }

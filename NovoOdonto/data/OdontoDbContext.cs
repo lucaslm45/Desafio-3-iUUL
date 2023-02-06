@@ -51,9 +51,11 @@ namespace NovoOdonto.data
 
         //public DbSet<Agendamento> Agendamentos { get; set; }
         public DbSet<Paciente> Pacientes { get; set; }
+        public DbSet<Agendamento> Agenda { get; set;}
 
-
-
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Consultorio;Username=postgres;Password=136341");
+        }
     }
 }

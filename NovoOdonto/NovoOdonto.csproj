@@ -26,6 +26,7 @@
 
 	<ItemGroup>
 	  <Folder Include="controller\controladoresPacientes\" />
+	  <Folder Include="Migrations\" />
 	</ItemGroup>
 
 </Project>

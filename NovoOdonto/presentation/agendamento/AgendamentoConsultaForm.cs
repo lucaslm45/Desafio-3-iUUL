@@ -14,6 +14,15 @@ namespace NovoOdonto.presentation.agendamento
         public AgendamentoDTO Agendamento { get; private set; }
         public AgendamentoConsultaForm() =>
             Agendamento = new();
+        
+        public void Cadastrar()
+        {
+            SolicitarCPF();
+            SolicitarDataConsulta();
+            SolicitarHoraInicio();
+            SolicitarHoraFim();
+
+        }
         /// <summary>
         /// Solicita um valor de CPF ao usuário.
         /// </summary>

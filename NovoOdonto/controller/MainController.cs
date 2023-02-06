@@ -45,7 +45,7 @@ namespace NovoOdonto.controller
                     InclusaoPacienteController.Inicia(Contexto);
                     break;
                 case "2":
-                    ExclusaoPacienteController.Inicia(Contexto);
+                    ExclusaoPacienteController.ExcluirPaciente(Contexto);
                     break;
                 case "3":
                     ListagemPaciente.ListarPorCPF(Contexto);
@@ -67,7 +67,6 @@ namespace NovoOdonto.controller
                     break;
                 case "2":
                     CancelamentoConsultaController.Inicia(Contexto);
-                    Console.WriteLine("//2 - Cancelar agendamento (NotImplemented)\n");
                     break;
                 case "3":
                     MenuListarAgenda();
