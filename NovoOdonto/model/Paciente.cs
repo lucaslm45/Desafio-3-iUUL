@@ -40,17 +40,26 @@ namespace NovoOdonto.model
                    Nascimento.ToShortDateString().PadRight((int)Espacos.Nascimento) +
                    Idade.ToString().PadLeft((int)Espacos.Idade);
 
-            //if (Consulta != null)
-            //{
-            //    saida += "\n" + "".PadRight((int)Espacos.CPF) +
-            //             $"Agendado para: {Consulta.DataConsulta.ToShortDateString()}".PadRight((int)Espacos.Nome) +
-            //             "".PadRight((int)Espacos.Nascimento) +
-            //             "".PadLeft((int)Espacos.Idade) +
-            //             "\n" + "".PadRight((int)Espacos.CPF) +
-            //             $"{Consulta.HoraInicio:hh\\:mm} às {Consulta.HoraFim:hh\\:mm}".PadRight((int)Espacos.Nome) +
-            //             "".PadRight((int)Espacos.Nascimento) +
-            //             "".PadLeft((int)Espacos.Idade);
-            //}
+            if (Agendamentos != null)
+            {
+                /// Busca agendamento futuro do paciente
+                /// 
+                var today = DateTime.Now;
+
+                var dataAtual = today.Date.ToUniversalTime();
+                var horaAtual = today.TimeOfDay;
+                var consulta = Agendamentos.First(a => (a.DataConsulta.Date == dataAtual && a.HoraInicio >= horaAtual) ||
+                                                        a.DataConsulta.Date > dataAtual);
+
+                saida += "\n" + "".PadRight((int)Espacos.CPF) +
+                         $"Agendado para: {consulta.DataConsulta.ToShortDateString()}".PadRight((int)Espacos.Nome) +
+                         "".PadRight((int)Espacos.Nascimento) +
+                         "".PadLeft((int)Espacos.Idade) +
+                         "\n" + "".PadRight((int)Espacos.CPF) +
+                         $"{consulta.HoraInicio:hh\\:mm} às {consulta.HoraFim:hh\\:mm}".PadRight((int)Espacos.Nome) +
+                         "".PadRight((int)Espacos.Nascimento) +
+                         "".PadLeft((int)Espacos.Idade);
+            }
             return saida;
         }
     }

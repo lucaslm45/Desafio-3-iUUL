@@ -18,7 +18,7 @@ namespace NovoOdonto.controller
 
         public void Inicia()
         {
-            CancelamentoConsultaController.Inicia(Contexto);
+            //ExclusaoPacienteController.Inicia(Contexto);
 
             MenuPrincipal();
         }
