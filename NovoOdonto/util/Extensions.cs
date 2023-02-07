@@ -229,5 +229,27 @@ namespace NovoOdonto.util
             }
             return true;
         }
+        public static bool NaoExisteAgendamentoFuturo(this string CPF, OdontoDbContext contexto)
+        {
+            // Obtem uma lista com todos os agendamentos de pacientes
+            var values = contexto.Agendamentos.Include(p => p.Paciente);
+
+            // Filtra apenas pelos agendamentos do paciente em datas e horários futuros
+            var hojeData = DateTime.Now;
+
+            var dataAtual = hojeData.Date.ToUniversalTime();
+            var horaAtual = hojeData.TimeOfDay;
+
+            var agendamentos = values.Where(a => a.Paciente.CPF == CPF &&
+                                            ((a.DataConsulta.Date > dataAtual) ||
+                                             (a.DataConsulta.Date == dataAtual && a.HoraInicio > horaAtual)));
+
+            var PossuiAgendamentoFuturo = agendamentos.Any();
+            if (PossuiAgendamentoFuturo)
+            {
+                Console.WriteLine($"O paciente {CPF} possui um agendamento futuro.");
+            }
+            return !PossuiAgendamentoFuturo;
+        }
     }
 }

@@ -4,6 +4,7 @@ using NovoOdonto.data.dto;
 using NovoOdonto.data.validator;
 using NovoOdonto.model;
 using NovoOdonto.presentation.agendamento;
+using NovoOdonto.util;
 
 namespace NovoOdonto.controller
 {
@@ -20,7 +21,8 @@ namespace NovoOdonto.controller
             do
             {
                 Form.SolicitarCPF();
-                isValid = Validador.IsValidCPF(Form.Agendamento.CPF);
+                isValid = Validador.IsValidCPF(Form.Agendamento.CPF) &&
+                          Validador.Agendamento.CPF.NaoExisteAgendamentoFuturo(contexto);
 
             } while (!isValid);
 
@@ -64,8 +66,15 @@ namespace NovoOdonto.controller
                 {
                     Form.SolicitarHoraFim();
                     if (Validador.IsValidHoraFim(Form.Agendamento.HoraFim) && Validador.IsAgendamentoDisponivel())
-                        break;
+                    {
+                        var paciente = contexto.Pacientes.Find(Validador.Agendamento.CPF);
+                        var Agendamento = new Agendamento(Validador.Agendamento.DataConsulta, Validador.Agendamento.HoraInicio, Validador.Agendamento.HoraFim, paciente);
+                        contexto.Agendamentos.Add(Agendamento);
+                        contexto.SaveChanges();
 
+                        Console.WriteLine("Agendamento feito com sucesso!\n");
+                        break;
+                    }
                     tentativas--;
                 }
 
@@ -73,17 +82,9 @@ namespace NovoOdonto.controller
                 if (tentativas == 0)
                 {
                     Console.WriteLine($"A quantidade de tentativas foi excedida, reinsira a data da consulta.");
-                    continue;
+                    isValid = false;
                 }
-                isValid = true;
             }
-
-            var paciente = contexto.Pacientes.Find(Validador.Agendamento.CPF);
-            var Agendamento = new Agendamento(Validador.Agendamento.DataConsulta, Validador.Agendamento.HoraInicio, Validador.Agendamento.HoraFim, paciente);
-            contexto.Agendamentos.Add(Agendamento);
-            contexto.SaveChanges();
-
-            Console.WriteLine("Agendamento feito com sucesso!\n");
         }
 
     }

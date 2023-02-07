@@ -33,7 +33,7 @@ namespace NovoOdonto.util
         public bool TemIntersecao(Intervalo outroIntervalo)
         {
             // ref: https://stackoverflow.com/questions/13513932/algorithm-to-detect-overlapping-periods
-            return DataHoraInicial < outroIntervalo.DataHoraFinal && outroIntervalo.DataHoraInicial < DataHoraFinal;
+            return DataHoraInicial <= outroIntervalo.DataHoraFinal && outroIntervalo.DataHoraInicial <= DataHoraFinal;
         }
     }
 }

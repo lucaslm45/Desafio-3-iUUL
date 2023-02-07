@@ -187,8 +187,6 @@ namespace NovoOdonto.data.validator
 
                 var agendamentos = Contexto.Agendamentos.Where(a => a.DataConsulta.Date == consultaData);
 
-                agendamentos = agendamentos.Where(a => a.HoraInicio >= inicio);
-
                 var temIntersecao = agendamentos.AsEnumerable().Any(a => periodoAgendado.TemIntersecao(
                     new Intervalo(a.DataConsulta.Date + a.HoraInicio, a.DataConsulta.Date + a.HoraFim)));
 
