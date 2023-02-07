@@ -66,6 +66,46 @@ namespace NovoOdonto.data.validator
             return true;
         }
         /// <summary>
+        /// Faz as validações necessárias para uma data de consulta a ser cancelada.
+        /// </summary>
+        /// <param name="strConsulta"></param>
+        /// <returns>Retorna um valor verdadeiro se a data de consulta for válida.</returns>
+        public bool IsValidDataCancelamento(string strConsulta)
+        {
+            // Data de Consulta
+            try
+            {
+                var DataConsulta = strConsulta.VerificaData();
+
+                Agendamento.DataConsulta = strConsulta;
+            }
+            catch (Exception ex)
+            {
+                return ex.EncerrarProcessoComErro();
+            }
+            return true;
+        }
+        /// <summary>
+        /// Faz as validações necessárias para uma hora de consulta a ser cancelada.
+        /// </summary>
+        /// <param name="strConsulta"></param>
+        /// <returns>Retorna um valor verdadeiro se a data de consulta for válida.</returns>
+        public bool IsValidHoraCancelamento(string strHoraConsulta)
+        {
+            // Data de Consulta
+            try
+            {
+                var DataConsulta = strHoraConsulta.VerificaHora();
+
+                Agendamento.HoraInicio = strHoraConsulta;
+            }
+            catch (Exception ex)
+            {
+                return ex.EncerrarProcessoComErro();
+            }
+            return true;
+        }
+        /// <summary>
         /// Faz as validações necessárias para o horário de início da consulta.
         /// </summary>
         /// <param name="strInicio">Representa o valor da hora de início da consulta.</param>

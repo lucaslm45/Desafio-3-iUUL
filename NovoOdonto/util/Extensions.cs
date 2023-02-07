@@ -1,4 +1,6 @@
-﻿using NovoOdonto.data;
+﻿using Microsoft.EntityFrameworkCore;
+using NovoOdonto.data;
+using NovoOdonto.model;
 using NovoOdonto.presentation;
 using NovoOdonto.presentation.agendamento;
 using NovoOdonto.presentation.paciente;
@@ -197,6 +199,46 @@ namespace NovoOdonto.util
         public static bool ExisteNoDicionario<TKey, TValor>(this Dictionary<TKey, TValor> dicionario, TKey chave)
         {
             return dicionario != null && dicionario.ContainsKey(chave);
+        }
+
+        public static bool PacienteTemAgendamentoFuturo(this string CPF, OdontoDbContext contexto)
+        {
+            try
+            {
+
+                // Obtem uma lista com todos os agendamentos de pacientes
+                var values = contexto.Agendamentos.Include(p => p.Paciente);
+
+                // Filtra apenas pelos agendamentos do paciente em datas e horários futuros
+                var hojeData = DateTime.Now;
+
+                var dataAtual = hojeData.Date.ToUniversalTime();
+                var horaAtual = hojeData.TimeOfDay;
+
+                var agendamentos = values.Where(a => a.Paciente.CPF == CPF &&
+                                                ((a.DataConsulta.Date > dataAtual) ||
+                                                 (a.DataConsulta.Date == dataAtual && a.HoraInicio > horaAtual)));
+                if (!agendamentos.Any())
+                {
+                    throw new Exception("Erro: Paciente não tem nenhum agendamento futuro.");
+                }
+                else
+                {
+                    Console.WriteLine($"\nAgendamentos Futuros do Paciente {CPF}: \n");
+
+                    CabecalhoListaAgenda();
+
+                    foreach (var consulta in agendamentos)
+                        Console.WriteLine(consulta);
+
+                    RodapeListaAgenda();
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.EncerrarProcessoComErro();
+            }
+            return true;
         }
     }
 }

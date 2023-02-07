@@ -1,4 +1,8 @@
-﻿using NovoOdonto.data;
+﻿using Microsoft.EntityFrameworkCore;
+using NovoOdonto.data;
+using NovoOdonto.data.validator;
+using NovoOdonto.presentation.agendamento;
+using NovoOdonto.presentation.paciente;
 using NovoOdonto.util;
 using System;
 using System.Collections.Generic;
@@ -12,31 +16,54 @@ namespace NovoOdonto.controller
     {
         public static void Inicia(OdontoDbContext contexto)
         {
-            Console.WriteLine("Digite o CPF do paciente que você quer excluir o agendamento: ");
+            bool isValid;
+            var Form = new CancelamentoConsultaForm();
+            var Validador = new AgendamentoValidador(contexto);
 
+            // CPF
+            Form.SolicitarCPF();
+            isValid = Validador.IsValidCPF(Form.Agendamento.CPF) &&
+                        Validador.Agendamento.CPF.PacienteTemAgendamentoFuturo(contexto);
 
-
-            string cpf = Console.ReadLine();
-            //Método para listar agenda do paciente
-
-            Console.WriteLine("Digite o ID do agendamento: ");
-
-            int id = Convert.ToInt32(Console.ReadLine());
-
-
-
-            if (cpf.IsCpf())
+            if (isValid)
             {
-                var paciente = contexto.Pacientes.Find(cpf);
-                var agendamento = contexto.Agendamentos.Find(id);
-                if (paciente != null)
+                // Data Cancelamento
+                do
                 {
-                    contexto.Agendamentos.Remove(agendamento);
-                    contexto.SaveChanges();
-                    Console.WriteLine($"Agendamento com ID {agendamento.ID} de {paciente.Nome} foi excluído!");
-                }
+                    Form.SolicitarDataConsulta();
+                    isValid = Validador.IsValidDataCancelamento(Form.Agendamento.DataConsulta);
+                } while (!isValid);
             }
-            else { Console.WriteLine("CPF inválido!"); }
+            if (isValid)
+            {
+                // Hora Cancelamento
+                do
+                {
+                    Form.SolicitarHoraInicio();
+                    isValid = Validador.IsValidHoraCancelamento(Form.Agendamento.HoraInicio);
+                } while (!isValid);
+            }
+            if (isValid)
+            {
+                var dataParaCancelamento = Validador.Agendamento.DataConsulta.FormataStringEmData().ToUniversalTime();
+                var horaParaCancelamento = Validador.Agendamento.HoraInicio.FormataStringEmHora();
+
+                var agendamentos = contexto.Agendamentos.Include(p => p.Paciente);
+
+                var consulta = agendamentos.FirstOrDefault(a => a.PacienteId == Validador.Agendamento.CPF
+                                                           && a.DataConsulta.Date == dataParaCancelamento.Date
+                                                           && a.HoraInicio == horaParaCancelamento);
+                if (consulta != null)
+                {
+                    contexto.Agendamentos.Remove(consulta);
+                    contexto.SaveChanges();
+                    var dataHoraConsulta = consulta.DataConsulta.Date + consulta.HoraInicio;
+
+                    Console.WriteLine($"Agendamento {dataHoraConsulta} de {consulta.Paciente.Nome} foi excluído!");
+                }
+                else
+                    Console.WriteLine("Erro: Agendamento não encontrado.");
+            }
         }
     }
 }
