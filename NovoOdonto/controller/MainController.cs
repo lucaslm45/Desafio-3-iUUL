@@ -82,10 +82,10 @@ namespace NovoOdonto.controller
             switch (AgendaForm.MenuListarAgenda())
             {
                 case "1":
-                    Console.WriteLine("//1 - Listar toda agenda\n");
+                    ConsultarAgendaController.Inicia(Contexto);
                     break;
                 case "2":
-                    Console.WriteLine("//2 - Listar agenda periodo (NotImplemented)\n");
+                    ConsultarAgendaController.IniciaPorPeriodo(Contexto);
                     break;
                 case "3":
                     return;

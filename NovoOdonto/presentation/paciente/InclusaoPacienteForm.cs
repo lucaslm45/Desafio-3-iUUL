@@ -25,7 +25,7 @@ namespace NovoOdonto.presentation.paciente
         }
         public void SolicitarNascimento()
         {
-            Console.Write("Data de Nascimento: ");
+            Console.Write("Data de Nascimento (ddMMaaaa):");
             Paciente.DataNascimento = Console.ReadLine();
         }
     }

@@ -1,5 +1,6 @@
 ﻿using NovoOdonto.data;
 using NovoOdonto.presentation;
+using NovoOdonto.presentation.agendamento;
 using NovoOdonto.presentation.paciente;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,24 @@ namespace NovoOdonto.util
         public static void RodapeListaPacientes()
         {
             Console.WriteLine("------------------------------------------------------------\n");
+        }
+        public static void CabecalhoListaAgenda()
+        {
+            Console.WriteLine("-------------------------------------------------------------");
+            Console.Write("Data".PadCenter((int)EspacosAgenda.Data));
+            Console.Write("H.Ini".PadCenter((int)EspacosAgenda.Tempo));
+            Console.Write("H.Fim".PadCenter((int)EspacosAgenda.Tempo));
+            Console.Write("Tempo".PadCenter((int)EspacosAgenda.Tempo));
+            Console.Write("Nome".PadRight((int)EspacosAgenda.Nome));
+            Console.WriteLine("Dt.Nasc.".PadCenter((int)EspacosAgenda.Data));
+
+
+            Console.WriteLine("-------------------------------------------------------------");
+        }
+        public static void RodapeListaAgenda()
+        {
+            Console.WriteLine("-------------------------------------------------------------");
+            Console.WriteLine(" ");
         }
         //Ref: https://stackoverflow.com/questions/17590528/pad-left-pad-right-pad-center-string
         /// <summary>
@@ -129,7 +148,7 @@ namespace NovoOdonto.util
         public static DateTime VerificaData(this string data)
         {
             if (!DateTime.TryParseExact(data, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime consulta))
-                throw new Exception("Data deve estar no formato ddMMaaaa");
+                throw new Exception("Erro: Data deve estar no formato ddMMaaaa");
 
             return consulta;
         }

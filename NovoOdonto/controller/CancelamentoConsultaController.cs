@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NovoOdonto.controller
 {
-    internal class CancelamentoConsultaController
+    public class CancelamentoConsultaController
     {
         public static void Inicia(OdontoDbContext contexto)
         {
