@@ -9,14 +9,12 @@ namespace NovoOdonto.controller
 {
     public class AgendamentoConsultaController
     {
-        private AgendamentoConsultaForm Form { get; set; } = new AgendamentoConsultaForm();
-        private AgendamentoValidador Validador { get; set; } = new AgendamentoValidador();
-        protected bool isValid { get; set; }
         public static void Inicia(OdontoDbContext contexto)
         {
-            var isValid = false;
+            const int NumeroTentivas = 3;
+            bool isValid;
             var Form = new AgendamentoConsultaForm();
-            var Validador = new AgendamentoValidador();
+            var Validador = new AgendamentoValidador(contexto);
 
             // CPF
             do
@@ -26,35 +24,66 @@ namespace NovoOdonto.controller
 
             } while (!isValid);
 
-            // data da consulta
-            do
+            isValid = false;
+
+            while (!isValid)
             {
-                Form.SolicitarDataConsulta();
-                isValid = Validador.IsValidDataConsulta(Form.Agendamento.DataConsulta);
-            } while (!isValid);
+                // Data da Consulta
+                do
+                {
+                    Form.SolicitarDataConsulta();
+                    isValid = Validador.IsValidDataConsulta(Form.Agendamento.DataConsulta);
+                } while (!isValid);
 
-            //Hora Incio
-            do
-            {
-                Form.SolicitarHoraInicio();
-                isValid = Validador.IsValidHoraInicio(Form.Agendamento.HoraInicio);
+                Console.WriteLine($"\"Atenção\" Número de tentativas para encontrar um horário de início: {NumeroTentivas}");
 
-            } while (!isValid);
+                var tentativas = NumeroTentivas;
+                //Hora Inicio
+                while (tentativas > 0)
+                {
+                    Form.SolicitarHoraInicio();
+                    if (Validador.IsValidHoraInicio(Form.Agendamento.HoraInicio))
+                        break;
 
-            //Hora fim
-            do
-            {
-                Form.SolicitarHoraFim();
-                isValid = Validador.IsValidHoraFim(Form.Agendamento.HoraFim);
-            } while (!isValid);
+                    tentativas--;
+                }
 
+                // Reinicia a busca solicitando novamente uma data de Consulta
+                if (tentativas == 0)
+                {
+                    Console.WriteLine($"A quantidade de tentativas foi excedida, reinsira a data da consulta.");
+                    continue;
+                }
 
+                //Hora Fim
+                Console.WriteLine($"\"Atenção\" Número de tentativas para encontrar um horário de fim: {NumeroTentivas}");
+
+                tentativas = NumeroTentivas;
+
+                while (tentativas > 0)
+                {
+                    Form.SolicitarHoraFim();
+                    if (Validador.IsValidHoraFim(Form.Agendamento.HoraFim) && Validador.IsAgendamentoDisponivel())
+                        break;
+
+                    tentativas--;
+                }
+
+                // Reinicia a busca solicitando novamente uma data de Consulta
+                if (tentativas == 0)
+                {
+                    Console.WriteLine($"A quantidade de tentativas foi excedida, reinsira a data da consulta.");
+                    continue;
+                }
+                isValid = true;
+            }
 
             var paciente = contexto.Pacientes.Find(Validador.Agendamento.CPF);
             var Agendamento = new Agendamento(Validador.Agendamento.DataConsulta, Validador.Agendamento.HoraInicio, Validador.Agendamento.HoraFim, paciente);
             contexto.Agendamentos.Add(Agendamento);
             contexto.SaveChanges();
-            Console.WriteLine("Agendamento feito com sucesso!@");
+
+            Console.WriteLine("Agendamento feito com sucesso!\n");
         }
 
     }

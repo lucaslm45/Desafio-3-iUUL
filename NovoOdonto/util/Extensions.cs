@@ -25,6 +25,19 @@ namespace NovoOdonto.util
         {
             Console.WriteLine("------------------------------------------------------------\n");
         }
+        //Ref: https://stackoverflow.com/questions/17590528/pad-left-pad-right-pad-center-string
+        /// <summary>
+        /// Faz com que um texto qualquer seja escrita de forma centralizada usando um número específico de espaços
+        /// </summary>
+        /// <param name="str">Texto que será escrito</param>
+        /// <param name="length">Espaço disponível para escrita</param>
+        /// <returns>Retorna um texto centralizado com espaços em branco nos espaços disponíveis</returns>
+        public static string PadCenter(this string str, int length)
+        {
+            int spaces = length - str.Length;
+            int padLeft = spaces / 2 + str.Length;
+            return str.PadLeft(padLeft).PadRight(length);
+        }
         /// <summary>
         /// Verifica se uma escolha não é válida
         /// </summary>
@@ -140,6 +153,10 @@ namespace NovoOdonto.util
         public static DateTime FormataStringEmData(this string data)
         {
             return DateTime.ParseExact(data, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None).ToUniversalTime();
+        }
+        public static TimeSpan FormataStringEmHora(this string hora)
+        {
+            return DateTime.ParseExact(hora, "HHmm", CultureInfo.InvariantCulture, DateTimeStyles.None).TimeOfDay;
         }
         // Ref: https://stackoverflow.com/questions/2194999/how-to-calculate-an-age-based-on-a-birthday
         /// <summary>
