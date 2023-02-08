@@ -16,6 +16,10 @@ namespace NovoOdonto.data.validator
         public TimeSpan AbreAs { get; private set; }
         public TimeSpan FechaAs { get; private set; }
 
+        /// <summary>
+        /// Inicia a classe AgendamentoValidador, definindo o horário de funcionamento do estabelecimento
+        /// </summary>
+        /// <param name="contexto"></param>
         public AgendamentoValidador(OdontoDbContext contexto)
         {
             Contexto = contexto;
@@ -25,6 +29,11 @@ namespace NovoOdonto.data.validator
         }
         public AgendamentoDTO Agendamento { get; private set; } = new AgendamentoDTO();
 
+        /// <summary>
+        /// Se o CPF for valido pela classe IsCpf é atribuido o valor a propriedade CPF da classe Agendamento
+        /// </summary>
+        /// <param name="cpf"></param>
+        /// <returns>true</returns>
         public bool IsValidCPF(string cpf)
         {
             try

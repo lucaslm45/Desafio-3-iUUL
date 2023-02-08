@@ -75,8 +75,8 @@ namespace NovoOdonto
             /// Habilitar o código acima antes de finalizar a entrega final
             /// 
 
-            var connectionString = "Host=localhost;Port=5432;Database=Consultorio;Username=postgres;Password=root";
-            //var connectionString = "Host=localhost;Port=5432;Database=Consultorio;Username=postgres;Password=136341";
+            // var connectionString = "Host=localhost;Port=5432;Database=Consultorio;Username=postgres;Password=root";
+            var connectionString = "Host=localhost;Port=5432;Database=Consultorio;Username=postgres;Password=136341";
             //connectionString.Replace("Database=Consultorio", $"Database={dataBaseName}");
 
             // Inicializa o contexto da Aplicação

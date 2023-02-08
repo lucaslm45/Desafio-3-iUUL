@@ -15,13 +15,18 @@ namespace NovoOdonto.controller
             AgendaForm = new();
             PacienteForm = new();
         }
-
+        /// <summary>
+        /// Inicia a aplicação chamando o método que abre o menu principal (MenuPrincipal())
+        /// </summary>
         public void Inicia()
         {
             //ExclusaoPacienteController.Inicia(Contexto);
 
             MenuPrincipal();
         }
+        /// <summary>
+        /// Método que inicía o menu principal
+        /// </summary>
         private void MenuPrincipal()
         {
             switch (PacienteForm.MenuPrincipal())
@@ -38,7 +43,9 @@ namespace NovoOdonto.controller
             }
             MenuPrincipal();
         }
-
+        /// <summary>
+        /// Método responsável pelo submenu que manipula a lista pacientes
+        /// </summary>
         private void MenuCadastraPaciente()
         {
             switch (PacienteForm.MenuCadastraPaciente())
@@ -60,6 +67,9 @@ namespace NovoOdonto.controller
             }
             MenuCadastraPaciente();
         }
+        /// <summary>
+        /// Inicia submenu responsável por manipular a Agenda
+        /// </summary>
         private void MenuAgenda()
         {
             switch (AgendaForm.MenuAgenda())
@@ -79,6 +89,9 @@ namespace NovoOdonto.controller
             MenuAgenda();
         }
 
+        /// <summary>
+        /// Inicia submenu responsável por perguntar ao usuário como a lista deve ser ordenada
+        /// </summary>
         private void MenuListarAgenda()
         {
             switch (AgendaForm.MenuListarAgenda())

@@ -28,6 +28,13 @@ namespace NovoOdonto.model
         public string PacienteId { get; set; }
         public Agendamento() { }
 
+        /// <summary>
+        /// Construtor da classe Agendamento, sendo responsável por fazer as entradas de dados para a Agenda.
+        /// </summary>
+        /// <param name="data">Recebe data no formato ddmmaaaa</param>
+        /// <param name="horaInicio">Recebe a hora inicial do formato hhmm</param>
+        /// <param name="horaFim">Recebe a hora final do formato hhmm</param>
+        /// <param name="paciente">Recebe objeto paciente ao qual o agendamento será vinculado</param>
         public Agendamento(string data, string horaInicio, string horaFim, Paciente paciente)
         {
             DataConsulta = data.FormataStringEmData();

@@ -15,6 +15,9 @@ namespace NovoOdonto.util
 {
     public static class Extensions
     {
+        /// <summary>
+        /// Cria o cabeçalho da lista de pacientes
+        /// </summary>
         public static void CabecalhoListaPacientes()
         {
             Console.WriteLine("------------------------------------------------------------");
@@ -24,10 +27,16 @@ namespace NovoOdonto.util
             Console.WriteLine("Idade".PadLeft((int)Espacos.Idade));
             Console.WriteLine("------------------------------------------------------------");
         }
+        /// <summary>
+        /// Cria o rodape da lista de pacientes
+        /// </summary>
         public static void RodapeListaPacientes()
         {
             Console.WriteLine("------------------------------------------------------------\n");
         }
+        /// <summary>
+        /// Cria o cabeçalho da lista agenda
+        /// </summary>
         public static void CabecalhoListaAgenda()
         {
             Console.WriteLine("-------------------------------------------------------------");
@@ -41,6 +50,9 @@ namespace NovoOdonto.util
 
             Console.WriteLine("-------------------------------------------------------------");
         }
+        /// <summary>
+        /// Cria o rodapé da lista agenda
+        /// </summary>
         public static void RodapeListaAgenda()
         {
             Console.WriteLine("-------------------------------------------------------------");
@@ -125,6 +137,13 @@ namespace NovoOdonto.util
             return cpf.EndsWith(digito);
         }
 
+        /// <summary>
+        /// Retorna um tipo bool que representa se o paciente já está ou não cadastrado
+        /// </summary>
+        /// <param name="context">A classe de contexto respons
+        /// ável pela conexão com o banco pelo entity framework</param>
+        /// <param name="chave"></param>
+        /// <returns>True ou False</returns>
         public static bool PacienteExisteNoBanco(this OdontoDbContext context, string chave)
         {
             var paciente = context.Pacientes.FirstOrDefault(p => p.CPF == chave);
