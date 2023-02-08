@@ -137,7 +137,7 @@ namespace NovoOdonto.util
         }
 
         /// <summary>
-        /// Retorna um tipo bool que representa se o paciente já está ou não cadastrado
+        /// Retorna um valor verdadeiro se o paciente já está cadastrado, senão retorna falso
         /// </summary>
         /// <param name="context">A classe de contexto respons
         /// ável pela conexão com o banco pelo entity framework</param>

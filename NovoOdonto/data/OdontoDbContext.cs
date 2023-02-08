@@ -24,19 +24,6 @@ namespace NovoOdonto.data
         {
 
         }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    var localizacaoPastaProjeto = "C:\\Users\\lucas\\Documents\\GitHub\\";
-        //    //var localizacaoPastaProjeto = "E:\\Residencia\\";
-
-        //    var configuration = new ConfigurationBuilder()
-        //        .AddJsonFile($"{localizacaoPastaProjeto}Desafio-3-iUUL\\NovoOdonto\\util\\appsettings.json", optional: false, reloadOnChange: true)
-        //        .Build();
-
-        //    var connectionString = configuration.GetConnectionString("DefaultConnection");
-
-        //    optionsBuilder.UseNpgsql(connectionString);
-        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

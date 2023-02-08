@@ -6,6 +6,10 @@ namespace NovoOdonto.controller
 {
     public class ConsultarPacientesController
     {
+        /// <summary>
+        /// Imprime no console a lista de pacientes em ordem crescente com base no número de CPF
+        /// </summary>
+        /// <param name="contexto"></param>
         public static void ListarPorCPF(OdontoDbContext contexto)
         {
             Extensions.CabecalhoListaPacientes();
@@ -16,7 +20,10 @@ namespace NovoOdonto.controller
 
             Extensions.RodapeListaPacientes();
         }
-
+        /// <summary>
+        /// Imprime no console a lista de pacientes em ordem alfabética com base no Nome
+        /// </summary>
+        /// <param name="contexto"></param>
         public static void ListarPorNome(OdontoDbContext contexto)
         {
             Extensions.CabecalhoListaPacientes();

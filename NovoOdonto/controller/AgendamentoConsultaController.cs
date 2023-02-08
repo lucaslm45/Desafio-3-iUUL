@@ -86,7 +86,11 @@ namespace NovoOdonto.controller
                     if (Validador.IsValidHoraFim(Form.Agendamento.HoraFim) && Validador.IsAgendamentoDisponivel())
                     {
                         var paciente = contexto.Pacientes.Find(Validador.Agendamento.CPF);
-                        var Agendamento = new Agendamento(Validador.Agendamento.DataConsulta, Validador.Agendamento.HoraInicio, Validador.Agendamento.HoraFim, paciente);
+                        var Agendamento = new Agendamento(Validador.Agendamento.DataConsulta,
+                                                          Validador.Agendamento.HoraInicio,
+                                                          Validador.Agendamento.HoraFim,
+                                                          paciente);
+
                         contexto.Agendamentos.Add(Agendamento);
                         contexto.SaveChanges();
 

@@ -14,7 +14,7 @@ namespace NovoOdonto.presentation.paciente
         public InclusaoPacienteForm() =>
             Paciente = new();
         /// <summary>
-        /// Recebe o CPF em formato string pelo console e atribui o valor recebido a propriedade CPF da Paciente
+        /// Recebe o CPF em formato string pelo console e atribui o valor recebido a propriedade CPF da PacienteDTO
         /// </summary>
         public void SolicitarCPF()
         {
@@ -22,7 +22,7 @@ namespace NovoOdonto.presentation.paciente
             Paciente.CPF = Console.ReadLine();
         }
         /// <summary>
-        /// Recebe um nome em formato string pelo console e atribui o valor recebido a propriedade Nome da classe Paciente
+        /// Recebe um nome em formato string pelo console e atribui o valor recebido a propriedade Nome da classe PacienteDTO
         /// </summary>
         public void SolicitarNome()
         {
@@ -30,7 +30,7 @@ namespace NovoOdonto.presentation.paciente
             Paciente.Nome = Console.ReadLine();
         }
         /// <summary>
-        /// Recebe data no formato ddMMaaaa em formato string pelo console e atribui o valor recebido a propriedade DataNascimento da classe Paciente
+        /// Recebe data no formato ddMMaaaa em formato string pelo console e atribui o valor recebido a propriedade DataNascimento da classe PacienteDTO
         /// </summary>
         public void SolicitarNascimento()
         {
