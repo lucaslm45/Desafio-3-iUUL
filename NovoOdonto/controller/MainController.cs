@@ -20,8 +20,6 @@ namespace NovoOdonto.controller
         /// </summary>
         public void Inicia()
         {
-            //ExclusaoPacienteController.Inicia(Contexto);
-
             MenuPrincipal();
         }
         /// <summary>
@@ -57,10 +55,10 @@ namespace NovoOdonto.controller
                     ExclusaoPacienteController.Inicia(Contexto);
                     break;
                 case "3":
-                    ListagemPaciente.ListarPorCPF(Contexto);
+                    ConsultarPacientesController.ListarPorCPF(Contexto);
                     break;
                 case "4":
-                    ListagemPaciente.ListarPorNome(Contexto);
+                    ConsultarPacientesController.ListarPorNome(Contexto);
                     break;
                 case "5":
                     return;

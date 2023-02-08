@@ -65,8 +65,8 @@ namespace NovoOdonto.controller
         {
             var agendamentos = contexto.Agendamentos
                            .Include(a => a.Paciente)
-                           .Where(a => a.DataConsulta.Date >= inicioPeriodo.Date.ToUniversalTime() &&
-                                  a.DataConsulta.Date <= finalPeriodo.Date.ToUniversalTime());
+                           .Where(a => a.DataConsulta >= inicioPeriodo.ToUniversalTime() &&
+                                  a.DataConsulta <= finalPeriodo.ToUniversalTime());
 
             if (agendamentos.Any())
             {

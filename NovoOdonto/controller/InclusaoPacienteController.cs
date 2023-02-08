@@ -1,6 +1,5 @@
 ﻿using NovoOdonto.data;
 using NovoOdonto.data.validator;
-using NovoOdonto.Infrastructure;
 using NovoOdonto.model;
 using NovoOdonto.presentation.paciente;
 

@@ -1,5 +1,4 @@
 ﻿using NovoOdonto.data.dto;
-using NovoOdonto.Infrastructure;
 using NovoOdonto.util;
 using System;
 using System.Collections.Generic;
@@ -13,14 +12,6 @@ namespace NovoOdonto.presentation.agendamento
     {
         public AgendamentoDTO Agendamento { get; private set; } = new();
 
-        public void Cadastrar()
-        {
-            SolicitarCPF();
-            SolicitarDataConsulta();
-            SolicitarHoraInicio();
-            SolicitarHoraFim();
-
-        }
         /// <summary>
         /// Solicita um valor de CPF ao usuário.
         /// </summary>
@@ -52,32 +43,6 @@ namespace NovoOdonto.presentation.agendamento
         {
             Console.Write("Hora final (HHmm): ");
             Agendamento.HoraFim = Console.ReadLine();
-        }
-        public void Process(StatusOperacao status)
-        {
-            switch (status)
-            {
-                case StatusOperacao.Sucesso:
-                    Console.WriteLine(Labels.Sucesso);
-                    break;
-                case StatusOperacao.PacienteNaoCadastrado:
-                    Console.WriteLine(Labels.PacienteNaoCadastrado);
-                    break;
-                case StatusOperacao.PacienteJaCadastrado:
-                    break;
-                case StatusOperacao.DadosInvalidosPaciente:
-                    Console.WriteLine(Labels.DadosInvalidosPaciente);
-                    break;
-                case StatusOperacao.ConsultaAgendada:
-                    Console.WriteLine(Labels.ConsultaAgendada);
-                    break;
-                case StatusOperacao.ConflitoAgendamento:
-                    Console.WriteLine(Labels.ConflitoAgendamento);
-                    break;
-                case StatusOperacao.AgendamentoNaoCadastrado:
-                    Console.WriteLine(Labels.AgendamentoNaoCadastrado);
-                    break;
-            }
         }
     }
 }

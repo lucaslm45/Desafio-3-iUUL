@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NovoOdonto.model;
+using NovoOdonto.util;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -51,8 +52,7 @@ namespace NovoOdonto.data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Consultorio;Username=postgres;Password=root");
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Consultorio;Username=postgres;Password=136341");
+            optionsBuilder.UseNpgsql(Conexao.ConnectionString);
         }
     }
 }

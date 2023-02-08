@@ -12,6 +12,15 @@ namespace NovoOdonto.controller
     {
         public static void Inicia(OdontoDbContext contexto)
         {
+            if (contexto.Pacientes.Any())
+            {
+                Process(contexto);
+            }
+            else
+                Console.WriteLine("Erro: não há nenhum paciente cadastrado.");
+        }
+        private static void Process(OdontoDbContext contexto)
+        {
             const int NumeroTentivas = 3;
             bool isValid;
             var Form = new AgendamentoConsultaForm();
@@ -20,9 +29,18 @@ namespace NovoOdonto.controller
             // CPF
             do
             {
-                Form.SolicitarCPF();
-                isValid = Validador.IsValidCPF(Form.Agendamento.CPF) &&
-                          Validador.Agendamento.CPF.NaoExisteAgendamentoFuturo(contexto);
+                try
+                {
+                    Form.SolicitarCPF();
+                    isValid = Validador.IsValidCPF(Form.Agendamento.CPF) &&
+                              Validador.Agendamento.CPF.NaoExisteAgendamentoFuturo(contexto);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return;
+                }
+
 
             } while (!isValid);
 
@@ -72,7 +90,7 @@ namespace NovoOdonto.controller
                         contexto.Agendamentos.Add(Agendamento);
                         contexto.SaveChanges();
 
-                        Console.WriteLine("Agendamento feito com sucesso!\n");
+                        Console.WriteLine("Agendamento feito com sucesso!");
                         break;
                     }
                     tentativas--;
@@ -86,6 +104,5 @@ namespace NovoOdonto.controller
                 }
             }
         }
-
     }
 }
