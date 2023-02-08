@@ -26,11 +26,12 @@ namespace NovoOdonto.util
         }
         public static void RodapeListaPacientes()
         {
-            Console.WriteLine("------------------------------------------------------------\n");
+            Console.WriteLine("------------------------------------------------------------");
         }
         public static void CabecalhoListaAgenda()
         {
             Console.WriteLine("-------------------------------------------------------------");
+
             Console.Write("Data".PadCenter((int)EspacosAgenda.Data));
             Console.Write("H.Ini".PadCenter((int)EspacosAgenda.Tempo));
             Console.Write("H.Fim".PadCenter((int)EspacosAgenda.Tempo));
@@ -38,13 +39,11 @@ namespace NovoOdonto.util
             Console.Write("Nome".PadRight((int)EspacosAgenda.Nome));
             Console.WriteLine("Dt.Nasc.".PadCenter((int)EspacosAgenda.Data));
 
-
             Console.WriteLine("-------------------------------------------------------------");
         }
         public static void RodapeListaAgenda()
         {
             Console.WriteLine("-------------------------------------------------------------");
-            Console.WriteLine(" ");
         }
         //Ref: https://stackoverflow.com/questions/17590528/pad-left-pad-right-pad-center-string
         /// <summary>
@@ -205,12 +204,12 @@ namespace NovoOdonto.util
             // Filtra apenas pelos agendamentos do paciente em datas e horários futuros
             var hojeData = DateTime.Now;
 
-            var dataAtual = hojeData.Date.ToUniversalTime();
+            var dataAtual = hojeData.ToUniversalTime();
             var horaAtual = hojeData.TimeOfDay;
 
             var agendamentos = values.Where(a => a.Paciente.CPF == CPF &&
-                                            ((a.DataConsulta.Date > dataAtual) ||
-                                             (a.DataConsulta.Date == dataAtual && a.HoraInicio > horaAtual)));
+                                            ((a.DataConsulta > dataAtual) ||
+                                             (a.DataConsulta == dataAtual && a.HoraInicio > horaAtual)));
             if (!agendamentos.Any())
             {
                 Console.WriteLine("Paciente não tem nenhum agendamento futuro.");
@@ -237,18 +236,22 @@ namespace NovoOdonto.util
             // Filtra apenas pelos agendamentos do paciente em datas e horários futuros
             var hojeData = DateTime.Now;
 
-            var dataAtual = hojeData.Date.ToUniversalTime();
+            var dataAtual = hojeData.ToUniversalTime();
             var horaAtual = hojeData.TimeOfDay;
 
             var agendamentos = values.Where(a => a.Paciente.CPF == CPF &&
-                                            ((a.DataConsulta.Date > dataAtual) ||
-                                             (a.DataConsulta.Date == dataAtual && a.HoraInicio > horaAtual)));
+                                            ((a.DataConsulta > dataAtual) ||
+                                             (a.DataConsulta == dataAtual && a.HoraInicio > horaAtual)));
+
+            if (agendamentos.Count() == 1)
+                throw new Exception("Erro: Existe apenas um paciente cadastrado e ele já possui um agendamento futuro");
 
             var PossuiAgendamentoFuturo = agendamentos.Any();
+
+
             if (PossuiAgendamentoFuturo)
-            {
                 Console.WriteLine($"O paciente {CPF} possui um agendamento futuro.");
-            }
+
             return !PossuiAgendamentoFuturo;
         }
     }

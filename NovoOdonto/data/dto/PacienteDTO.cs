@@ -8,7 +8,5 @@ namespace NovoOdonto.data.dto
         public string CPF { get; set; }
         public string Nome { get; set; }
         public string DataNascimento { get; set; }
-        public int Idade { get; }
-
     }
 }

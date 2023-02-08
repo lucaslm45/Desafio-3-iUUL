@@ -48,17 +48,20 @@ namespace NovoOdonto.model
 
                 var dataAtual = today.Date.ToUniversalTime();
                 var horaAtual = today.TimeOfDay;
-                var consulta = Agendamentos.First(a => (a.DataConsulta.Date == dataAtual && a.HoraInicio >= horaAtual) ||
-                                                        a.DataConsulta.Date > dataAtual);
+                var consulta = Agendamentos.FirstOrDefault(a => (a.DataConsulta == dataAtual && a.HoraInicio >= horaAtual) ||
+                                                        a.DataConsulta > dataAtual);
 
-                saida += "\n" + "".PadRight((int)Espacos.CPF) +
-                         $"Agendado para: {consulta.DataConsulta.ToShortDateString()}".PadRight((int)Espacos.Nome) +
-                         "".PadRight((int)Espacos.Nascimento) +
-                         "".PadLeft((int)Espacos.Idade) +
-                         "\n" + "".PadRight((int)Espacos.CPF) +
-                         $"{consulta.HoraInicio:hh\\:mm} às {consulta.HoraFim:hh\\:mm}".PadRight((int)Espacos.Nome) +
-                         "".PadRight((int)Espacos.Nascimento) +
-                         "".PadLeft((int)Espacos.Idade);
+                if (consulta != null)
+                {
+                    saida += "\n" + "".PadRight((int)Espacos.CPF) +
+                             $"Agendado para: {consulta.DataConsulta.ToShortDateString()}".PadRight((int)Espacos.Nome) +
+                             "".PadRight((int)Espacos.Nascimento) +
+                             "".PadLeft((int)Espacos.Idade) +
+                             "\n" + "".PadRight((int)Espacos.CPF) +
+                             $"{consulta.HoraInicio:hh\\:mm} às {consulta.HoraFim:hh\\:mm}".PadRight((int)Espacos.Nome) +
+                             "".PadRight((int)Espacos.Nascimento) +
+                             "".PadLeft((int)Espacos.Idade);
+                }
             }
             return saida;
         }

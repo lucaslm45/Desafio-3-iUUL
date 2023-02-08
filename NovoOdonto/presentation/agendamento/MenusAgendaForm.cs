@@ -19,7 +19,7 @@ namespace NovoOdonto.presentation.agendamento
 
             do
             {
-                Console.WriteLine("Listar Agenda");
+                Console.WriteLine("\nListar Agenda");
                 Console.WriteLine("1-Listar toda a agenda");
                 Console.WriteLine("2-Listar agenda de um período");
                 Console.WriteLine("3-Voltar p/ Menu Agenda");
@@ -37,7 +37,7 @@ namespace NovoOdonto.presentation.agendamento
 
             do
             {
-                Console.WriteLine("Agenda");
+                Console.WriteLine("\nAgenda");
                 Console.WriteLine("1-Agendar consulta");
                 Console.WriteLine("2-Cancelar agendamento");
                 Console.WriteLine("3-Listar agenda");

@@ -15,7 +15,7 @@ namespace NovoOdonto.presentation.paciente
 
             do
             {
-                Console.WriteLine("Menu Principal");
+                Console.WriteLine("\nMenu Principal");
                 Console.WriteLine("1-Cadastro de pacientes");
                 Console.WriteLine("2-Agenda");
                 Console.WriteLine("3-Fim");
@@ -33,7 +33,7 @@ namespace NovoOdonto.presentation.paciente
 
             do
             {
-                Console.WriteLine("Menu do Cadastro de Pacientes");
+                Console.WriteLine("\nMenu do Cadastro de Pacientes");
                 Console.WriteLine("1-Cadastrar novo paciente");
                 Console.WriteLine("2-Excluir paciente");
                 Console.WriteLine("3-Listar pacientes (ordenado por CPF)");
